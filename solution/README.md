@@ -1,5 +1,3 @@
-Arkage assessment
-
 Follow the steps to start the app
 
 1. cd solution
