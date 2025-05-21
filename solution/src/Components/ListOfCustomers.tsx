@@ -61,8 +61,7 @@ const ListOfCustomers = () => {
                     background: "rgba(255, 255, 255, 0)",
                     backdropFilter: "blur(10px)",
                     WebkitBackdropFilter: "blur(10px)",
-                    boxShadow: `0 5px 10px rgba(154, 160, 185, 0.544),
-    0 16px 40px rgba(234, 236, 247, 0.485)`,
+                    boxShadow: `0 5px 10px rgba(154, 160, 185, 0.544), 0 16px 40px rgba(234, 236, 247, 0.485)`,
                   }}
                 >
                   <CardContent>
