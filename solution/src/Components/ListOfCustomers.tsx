@@ -2,10 +2,11 @@ import {
   Avatar,
   Badge,
   Box,
+  Button,
   Card,
   CardContent,
+  Chip,
   Grid,
-  Link,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -35,7 +36,7 @@ const ListOfCustomers = () => {
 
   return (
     <>
-      <Box sx={{ backgroundColor: "#f5f5f5", padding: 4, minHeight: "100vh" }}>
+      <Box sx={{ padding: 4 }}>
         <Typography variant="h4" gutterBottom fontWeight="bold">
           Customer Dashboard
         </Typography>
@@ -51,16 +52,17 @@ const ListOfCustomers = () => {
                   sx={{
                     borderRadius: 3,
                     padding: 2,
-                    background: "rgba(255, 255, 255, 0.144)",
-                    boxShadow: "0 4px 16px 0 rgba(27, 139, 77, 0.37)",
-                    backdropFilter: "blur(120px)",
-                    WebkitBackdropFilter: "blur(10px)",
                     border: "1px solid rgba(175, 15, 15, 0.18)",
                     color: "#080303",
-                    transition: "0.3s",
+                    transition: "0.1s",
                     "&:hover": {
                       boxShadow: theme.shadows[2],
                     },
+                    background: "rgba(255, 255, 255, 0)",
+                    backdropFilter: "blur(10px)",
+                    WebkitBackdropFilter: "blur(10px)",
+                    boxShadow: `0 5px 10px rgba(154, 160, 185, 0.544),
+    0 16px 40px rgba(234, 236, 247, 0.485)`,
                   }}
                 >
                   <CardContent>
@@ -69,19 +71,41 @@ const ListOfCustomers = () => {
                         <Avatar sx={{ backgroundColor: "#4caf50" }}></Avatar>
                       </Badge>
                       <Box>
-                        <Typography variant="h6">{name}</Typography>
-                        <Typography variant="body2">{`Email: ${email}`}</Typography>
-                        <Typography variant="body2">
-                          {`Number of orders: ${orders.length}`}
-                        </Typography>
-                        <Typography>{`Total amount spent: €${total.toFixed(
-                          2
-                        )}`}</Typography>
+                        {[
+                          { value: name, description: "Name: " },
+                          { value: email, description: "Email: " },
+                          {
+                            value: orders.length,
+                            description: "Number of orders: ",
+                          },
+                          {
+                            value: total.toFixed(2),
+                            description: "Total amount spent: €",
+                          },
+                        ].map((item) => (
+                          <Chip
+                            sx={{
+                              background: "rgba(14, 126, 65, 0.37)",
+                              justifyContent: "start",
+                              width: "100%",
+                            }}
+                            label={item.description.concat(
+                              item.value as string
+                            )}
+                            variant="outlined"
+                          />
+                        ))}
                       </Box>
                     </Box>
-                    <Link
-                      component="button"
-                      variant="body2"
+                    <Button
+                      sx={{
+                        color: "#080303",
+                        "&:hover": {
+                          background: "rgba(14, 126, 65, 0.37)",
+                          transition: "0.1s",
+                        },
+                      }}
+                      variant="text"
                       onClick={() => {
                         handleOpenOrdersModal(
                           customers.find((item: Customer) => item.id === id)
@@ -89,7 +113,7 @@ const ListOfCustomers = () => {
                       }}
                     >
                       View Orders
-                    </Link>
+                    </Button>
                     {selectedCustomer && (
                       <ViewOrdersModal
                         open={open}
