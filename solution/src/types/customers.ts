@@ -7,6 +7,8 @@ export interface Customer {
 
 export interface Order {
   id: number;
-  total: number;
+  total: number | undefined;
   date: string;
 }
+
+export type SortingTypes = "ascending" | "descending";
