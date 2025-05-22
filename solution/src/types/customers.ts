@@ -12,3 +12,5 @@ export interface Order {
 }
 
 export type SortingTypes = "ascending" | "descending";
+
+export type SearchFilter = "name" | "email";
