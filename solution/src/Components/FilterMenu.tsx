@@ -25,12 +25,6 @@ const FilterMenu = ({
 }: FilterMenuProps) => {
   return (
     <Menu
-      sx={{
-        p: "2px 4px",
-        alignContent: "center",
-        color: "#080303",
-        background: "rgba(255, 255, 255, 0)",
-      }}
       anchorEl={anchor}
       open={open}
       onClose={onClose}
@@ -39,18 +33,31 @@ const FilterMenu = ({
         horizontal: "left",
       }}
     >
-      <Typography variant="subtitle2" sx={{ mb: 1 }}>
+      <Typography
+        variant="subtitle2"
+        sx={{ mb: 2, fontWeight: "bold", padding: 2 }}
+      >
         Filter by:
       </Typography>
       <RadioGroup value={filter} onChange={onChange}>
         <MenuItem>
-          <FormControlLabel value="name" control={<Radio />} label="Name" />
+          <FormControlLabel
+            sx={{ color: "#080303", padding: 2 }}
+            value="name"
+            control={<Radio />}
+            label="Name"
+          />
         </MenuItem>
         <MenuItem>
-          <FormControlLabel value="email" control={<Radio />} label="Email" />
+          <FormControlLabel
+            sx={{ color: "#080303", padding: 2 }}
+            value="email"
+            control={<Radio />}
+            label="Email"
+          />
         </MenuItem>
       </RadioGroup>
-      <Divider />
+      <Divider sx={{ my: 2 }} />
     </Menu>
   );
 };

@@ -1,12 +1,14 @@
 import {
   Button,
-  Container,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  IconButton,
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
   Typography,
 } from "@mui/material";
 import type { Customer, Order, SortingTypes } from "../types/customers";
@@ -52,22 +54,32 @@ const ViewOrdersModal = ({
     <Dialog key={id} open={open} onClose={onClose} maxWidth={"xs"} fullWidth>
       <DialogTitle>{name}</DialogTitle>
       <DialogContent>
-        <Typography>Orders</Typography>
+        <Typography variant="h6" gutterBottom>
+          Orders
+        </Typography>
         {sortedOrders.length > 0 ? (
-          sortedOrders.map(({ id, date, total }) => (
-            <DialogContentText>
-              <Typography>Order ID: ${id}</Typography>
-              <Typography>Amount: ${total}</Typography>
-              <Typography>Date: ${dayjs(date).format("DD/MM/YYYY")}</Typography>
-            </DialogContentText>
-          ))
+          <List>
+            {sortedOrders.map(({ id, date, total }) => (
+              <div key={id}>
+                <ListItem>
+                  <ListItemText
+                    primary={`Order ID: ${id}`}
+                    secondary={`Amount: €${total} | Date: ${dayjs(date).format(
+                      "DD/MM/YYYY"
+                    )}`}
+                  />
+                </ListItem>
+                <Divider />
+              </div>
+            ))}
+          </List>
         ) : (
           <DialogContentText>
-            <Typography>There are no orders</Typography>
+            <Typography>No orders found.</Typography>
           </DialogContentText>
         )}
-        <Typography sx={{ paddingTop: "2px" }}>
-          Average order value: ${getAverageOrderValue(sortedOrders).toFixed(2)}
+        <Typography variant="h6" sx={{ paddingTop: "10px" }}>
+          Average order value: €{getAverageOrderValue(sortedOrders).toFixed(2)}
         </Typography>
       </DialogContent>
       <DialogActions
@@ -89,7 +101,7 @@ const ViewOrdersModal = ({
             sortType === "ascending" ? <ArrowUpward /> : <ArrowDownward />
           }
         >
-          {sortType}
+          {`Sort by date (${sortType})`}
         </Button>
         <Button
           sx={{
